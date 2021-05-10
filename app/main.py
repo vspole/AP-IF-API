@@ -12,15 +12,13 @@ db = getFirebaseDB()
 
 @app.get("/")
 async def root():
-    doc_ref = db.collection(u'groups').document(u'321')
-    doc_ref.set({
-        u'first': u'Ada',
-        u'last': u'Lovelace',
-        u'born': 1815
-    })
     return {"message": "Welcome to AP-IF part 2"}
 
 @app.post("/createGroup", response_model = Group )
 async def createGroup(group:Group):
     newGroup = createGroupInFirebase(group)
     return group
+@app.post("/addUserToGroup", response_model = User )
+async def createUser(user:User):
+    newUser = addUserToGroupFirebase(user)
+    return newUser
