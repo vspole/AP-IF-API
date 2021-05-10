@@ -4,8 +4,8 @@ from typing import Optional
 class Group(BaseModel):
     groupID: Optional[int] = 0
     userID: Optional[int] = 0
-    longitude: int
-    latitude: int
+    longitude: float
+    latitude: float
     numberOfUsers: Optional[int] = 0
     numberDone: Optional[int] = 0
     creatorName: str
