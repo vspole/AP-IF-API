@@ -4,7 +4,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from models import *
-
+from placesSearch import *
 
 cred = credentials.Certificate("FirebaseKey/ap-if-1d696-06be194351d3.json")
 firebase_admin.initialize_app(cred)
@@ -20,12 +20,13 @@ def createGroupInFirebase(group: Group):
         "GroupID": uniqueGroupID,
         "Longitude": group.longitude,
         "Latitude": group.latitude,
-        "NumberOfUsers": group.numberOfUsers,
-        "NumberDone": group.numberDone,
+        "NumberOfUsers": 0,
+        "NumberDone": 0,
     }
     db.collection("groups").document(str(uniqueGroupID)).set(data)
     group.groupID = uniqueGroupID
     group.userID = (addCreatorToUsers(group)).userID
+    addRestaurantsToGroup(group,reccursiveReastaurant(group.latitude, group.longitude, group.radius, []))
     return group
 
 def createRandomGroupID():
@@ -80,3 +81,12 @@ def checkUserIdUnique(userID,groupID):
         return False
     else:
         return True
+
+def addRestaurantsToGroup(group:Group,listOfRestaurants):
+    for restaurant in listOfRestaurants:
+        data = {
+            "RestaurantName": restaurant.name,
+            "priceLevel": restaurant.priceLevel,
+            "rating": restaurant.rating
+            }
+        db.collection("groups").document(str(group.groupID)).collection("Restaurants").document(restaurant.name).set(data)

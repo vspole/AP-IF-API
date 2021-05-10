@@ -6,11 +6,15 @@ class Group(BaseModel):
     userID: Optional[int] = 0
     longitude: float
     latitude: float
-    numberOfUsers: Optional[int] = 0
-    numberDone: Optional[int] = 0
+    radius: int
     creatorName: str
 
 class User(BaseModel):
     groupID: int
     userID: Optional[int] = 0
     name: str
+
+class Restaurant(BaseModel):
+    name: str
+    priceLevel: Optional[int] = 0
+    rating: Optional[int] = 0

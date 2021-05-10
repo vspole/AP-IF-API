@@ -12,6 +12,7 @@ __pycache__/
 *.so
 #Firebase
 FirebaseKey/
+GooglePlacesAPIKey.txt
 # Distribution / packaging
 .Python
 build/

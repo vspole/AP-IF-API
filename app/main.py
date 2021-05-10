@@ -17,8 +17,13 @@ async def root():
 @app.post("/createGroup", response_model = Group )
 async def createGroup(group:Group):
     newGroup = createGroupInFirebase(group)
-    return group
+    return newGroup
+
 @app.post("/addUserToGroup", response_model = User )
 async def createUser(user:User):
     newUser = addUserToGroupFirebase(user)
     return newUser
+
+def test(group:Group):
+    newGroup = createGroupInFirebase(group)
+    return newGroup
