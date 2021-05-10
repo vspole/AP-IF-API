@@ -4,6 +4,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from models import *
 from firebase import *
+from typing import List
 
 app = FastAPI()
 
@@ -23,3 +24,7 @@ async def createGroup(group:Group):
 async def createUser(user:User):
     newUser = addUserToGroupFirebase(user)
     return newUser
+
+@app.get("/getRestaurantList",response_model = List[Restaurant])
+async def getRestaurantList(groupID: int):
+    return getRestaurantListFromFB(groupID)

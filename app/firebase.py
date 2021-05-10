@@ -86,7 +86,15 @@ def addRestaurantsToGroup(group:Group,listOfRestaurants):
     for restaurant in listOfRestaurants:
         data = {
             "RestaurantName": restaurant.name,
-            "priceLevel": restaurant.priceLevel,
-            "rating": restaurant.rating
+            "PriceLevel": restaurant.priceLevel,
+            "Rating": restaurant.rating
             }
         db.collection("groups").document(str(group.groupID)).collection("Restaurants").document(restaurant.name).set(data)
+
+def getRestaurantListFromFB(groupID):
+    restaurantList = []
+    restaurants = db.collection("groups").document(str(groupID)).collection("Restaurants").stream()
+    for restaurant in restaurants:
+        data = restaurant.to_dict()
+        restaurantList.append(Restaurant(name=data["RestaurantName"]))
+    return restaurantList
