@@ -23,7 +23,3 @@ async def createGroup(group:Group):
 async def createUser(user:User):
     newUser = addUserToGroupFirebase(user)
     return newUser
-
-def test(group:Group):
-    newGroup = createGroupInFirebase(group)
-    return newGroup
