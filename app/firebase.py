@@ -29,6 +29,8 @@ def createGroupInFirebase(group: Group):
         "NumberDone": group.numberDone,
     }
     db.collection("groups").document(str(uniqueGroupID)).set(data)
+    group.groupID = uniqueGroupID
+    return group
 
 def createRandomGroupID():
     return str(randint(100000, 999999))

@@ -22,5 +22,5 @@ async def root():
 
 @app.post("/createGroup", response_model = Group )
 async def createGroup(group:Group):
-    createGroupInFirebase(group)
+    newGroup = createGroupInFirebase(group)
     return group
