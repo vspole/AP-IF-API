@@ -55,7 +55,7 @@ def addUserToGroupFirebase(user: User):
         "userID": user.userID,
         "Name": user.name,
         }
-    db.collection("groups").document(str(user.groupID)).collection("users").document(str(user.userID)).set(data)
+    db.collection("groups").document(str(user.groupID)).collection("Users").document(str(user.userID)).set(data)
     addToNumOfUsers(user.groupID)
     return user
 
@@ -75,7 +75,7 @@ def createRandomUserID(groupID):
     return userID
 
 def checkUserIdUnique(userID,groupID):
-    doc_ref = db.collection("groups").document(str(groupID)).collection("users").document(str(userID))
+    doc_ref = db.collection("groups").document(str(groupID)).collection("Users").document(str(userID))
     doc = doc_ref.get()
     if doc.exists:
         return False
