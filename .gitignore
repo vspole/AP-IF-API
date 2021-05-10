@@ -10,7 +10,8 @@ __pycache__/
 
 # C extensions
 *.so
-
+#Firebase
+FirebaseKey/
 # Distribution / packaging
 .Python
 build/

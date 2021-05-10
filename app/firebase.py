@@ -6,7 +6,7 @@ from firebase_admin import firestore
 from models import *
 
 
-cred = credentials.Certificate('FirebaseKey/ap-if-1d696-cce240a3e93f.json')
+cred = credentials.Certificate("FirebaseKey/ap-if-1d696-06be194351d3.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
