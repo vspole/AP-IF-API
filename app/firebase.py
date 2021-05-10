@@ -25,6 +25,7 @@ def createGroupInFirebase(group: Group):
     }
     db.collection("groups").document(str(uniqueGroupID)).set(data)
     group.groupID = uniqueGroupID
+    group.userID = (addCreatorToUsers(group)).userID
     return group
 
 def createRandomGroupID():
@@ -43,8 +44,11 @@ def checkIfGroupUnique(testGroupID):
         return True
 
 #Create UserInfo
-def addUserToGroupFirebase(user: User):
+def addCreatorToUsers(group:Group):
+    user = User(name=group.creatorName, groupID=group.groupID)
+    return(addUserToGroupFirebase(user))
 
+def addUserToGroupFirebase(user: User):
     user.userID = createRandomUserID(user.groupID)
     data = {
         "userID": user.userID,

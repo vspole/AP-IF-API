@@ -6,8 +6,9 @@ class Group(BaseModel):
     userID: Optional[int] = 0
     longitude: int
     latitude: int
-    numberOfUsers: Optional[int] = 1
+    numberOfUsers: Optional[int] = 0
     numberDone: Optional[int] = 0
+    creatorName: str
 
 class User(BaseModel):
     groupID: int
